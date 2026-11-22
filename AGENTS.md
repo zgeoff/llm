@@ -77,9 +77,10 @@ results/        the rows that `llm bench` appends, one file per model and backen
 - Run a script as administrator through `Start-Process -Verb RunAs`, which shows one UAC prompt, and
   check the result afterwards, because the elevated process cannot pipe output back. Never run one
   without printing what it does first.
-- A listening Windows process on `0.0.0.0:8181` is reachable from WSL at the host IP with no
-  firewall rule. `llm up` prints the rule, scoped to the WSL interface alias and never to a subnet,
-  only when WSL cannot reach a server that Windows can.
+- Add no firewall rule up front: llama-swap listens on `0.0.0.0:8181`, and WSL reaches it at the
+  host IP. When WSL cannot reach llama-swap but Windows reaches it on loopback, `llm up` prints the
+  rule to run. The rule is scoped to the WSL interface alias, never to a subnet, because the WSL NAT
+  subnet can change between WSL starts.
 - The llama-swap config sets the ROCm `PATH` as a static value, never `${env.PATH}`.
 - `llm down`, and `llm bench` when llama-swap runs, stop every `llama-server` on the host. Do not
   run them while a manual server runs.

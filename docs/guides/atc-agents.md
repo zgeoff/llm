@@ -1,13 +1,28 @@
 # atc agents
 
 `llm profile <id>` adds an atc agent that runs Claude Code against a catalog model through the
-proxy. It backs up `~/.config/atc/config.json`, refuses to overwrite an agent without `--force`, and
-never restarts atc. A model whose template comes from the GGUF must be pulled first. `--rm` removes
-an agent that a profile wrote.
+proxy. It backs up `~/.config/atc/config.json` first, refuses to overwrite an agent without
+`--force`, and never restarts atc. `--name` sets the agent's name, `local-<id>` by default, and
+leaves the label as it is. `--rm <name>` removes an agent that a profile wrote, and
+`llm profile --help` lists every flag.
 
-```sh
-llm profile qwen3.6-35b-a3b-heretic --name local-heretic
-```
+1. When the catalog sets no `chatTemplateFile` for the model, pull the model first, because
+   `llm profile` reads its chat template from the GGUF:
+
+   ```sh
+   llm pull qwen3.6-35b-a3b-heretic
+   ```
+
+2. Add the agent:
+
+   ```sh
+   llm profile qwen3.6-35b-a3b-heretic --name local-heretic
+   ```
+
+3. Restart the atc daemon, so it loads the agent.
+
+The agent sends its requests to the proxy, so run the proxy and llama-swap before you use it.
+[The README](../../README.md#quick-start) shows `llm proxy` and `llm up`.
 
 ## The agent label
 
