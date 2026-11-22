@@ -21,8 +21,8 @@ leaves the label as it is. `--rm <name>` removes an agent that a profile wrote, 
 
 3. Restart the atc daemon, so it loads the agent.
 
-The agent sends its requests to the proxy, so run the proxy and llama-swap before you use it.
-[The README](../../README.md#quick-start) shows `llm proxy` and `llm up`.
+Run the proxy and llama-swap before you use the agent, because it sends its requests to the proxy.
+For `llm proxy` and `llm up`, see the [README quick start](../../README.md#quick-start).
 
 ## The agent label
 

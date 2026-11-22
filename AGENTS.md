@@ -52,8 +52,8 @@ results/        the rows that `llm bench` appends, one file per model and backen
 - `bun run format` fixes formatting.
 - `llm` runs `install`, `pull`, `rm`, `inspect`, `ls`, `disk`, `config`, `up`, `down`, `status`,
   `logs`, `bench`, `proxy`, `profile`, `load`, `unload`, `game`, `ttft`, `compare` and `autostart`.
-  A command never touches Windows or the network in a test: tests fake the PowerShell runner and
-  answer HTTP with msw.
+  In a test, fake the PowerShell runner and answer HTTP with msw, so no command touches Windows or
+  the network.
 - `bun src/cli.ts <command>` runs the CLI from a checkout, and `bun link` installs `llm`.
 
 ## Windows interop
@@ -88,9 +88,9 @@ results/        the rows that `llm bench` appends, one file per model and backen
   llama-swap at the host IP, read again on each request. `install` writes
   `~/.config/systemd/user/llm-proxy.service` and runs `systemctl --user`.
 - `llm profile` edits `~/.config/atc/config.json` after a backup named
-  `config.json.bak-<UTC stamp>-profile-<id>`. It never restarts atc. A test points `atcConfigPath`
-  and `homeDir` at a temp folder and fakes `runProcess`, so no test reads the real atc config or
-  runs `systemctl`.
+  `config.json.bak-<UTC stamp>-profile-<id>`. It never restarts atc. In a test, point
+  `atcConfigPath` and `homeDir` at a temp folder and fake `runProcess`, so no test reads the real
+  atc config or runs `systemctl`.
 - In WSL, `ls` is an alias for `eza --icons` and can hang a non-interactive shell. Use `command ls`.
 
 ## Dependencies
