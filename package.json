@@ -1,0 +1,61 @@
+{
+  "name": "@zgeoff/llm",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Installs, serves and benchmarks local LLMs on a Windows host from WSL2",
+  "license": "MIT",
+  "bin": {
+    "llm": "src/cli.ts"
+  },
+  "type": "module",
+  "scripts": {
+    "start": "bun src/cli.ts",
+    "audit": "bun audit --ignore=GHSA-g3hv-75wg-m249",
+    "deadcode": "knip",
+    "format": "oxfmt . && format-codemod --quiet .",
+    "format:check": "oxfmt --check . && format-codemod --check --quiet .",
+    "lint": "TSRS_FAST=1 oxlint --type-aware --type-check --report-unused-disable-directives-severity error",
+    "lint:fix": "oxlint --fix",
+    "test": "bun test",
+    "typecheck": "tsrs --fast -p tsconfig.json --noEmit",
+    "prepare": "command -v git > /dev/null 2>&1 && lefthook install --force || true",
+    "test:related": "bun scripts/run-related-tests.ts",
+    "check:commits": "chex commits",
+    "check:local-paths": "chex local-paths",
+    "check:test-timeouts": "chex test-timeouts",
+    "check:dependency-gates": "chex dependency-gates",
+    "check:workflows": "chex workflows",
+    "check:uncommitted": "chex uncommitted",
+    "check:docs": "chex prose length links readmes skill"
+  },
+  "dependencies": {
+    "@zgeoff/std": "0.4.5",
+    "gunshi": "1.0.0-rc.1",
+    "tiny-invariant": "1.3.3",
+    "ts-pattern": "5.9.0",
+    "yaml": "2.9.1",
+    "zod": "4.6.6"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "21.2.3",
+    "@mswjs/interceptors": "0.45.11",
+    "@stylistic/eslint-plugin": "5.10.0",
+    "@types/bun": "1.4.3",
+    "@zgeoff/bun-test-extended": "0.2.1",
+    "@zgeoff/chex": "0.3.13",
+    "@zgeoff/commitlint-config": "0.1.0",
+    "@zgeoff/diet": "0.2.2",
+    "@zgeoff/format-codemod": "0.3.2",
+    "@zgeoff/oxlint-config": "0.11.1",
+    "@zgeoff/testing": "0.4.1",
+    "@zgeoff/tsconfig": "2.0.0",
+    "knip": "6.41.0",
+    "lefthook": "2.2.1",
+    "msw": "3.0.4",
+    "oxfmt": "0.72.0",
+    "oxlint": "1.92.0",
+    "tsrs": "0.25.0-ts7.1.0-beta",
+    "typescript": "7.0.2"
+  },
+  "packageManager": "bun@1.4.3"
+}

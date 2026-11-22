@@ -1,0 +1,119 @@
+# The catalog every llm command reads. src/catalog/catalog-schema.ts defines each key.
+machine:
+  modelsDir: 'D:\models'
+  binDir: 'C:\llm\bin'
+  rocmLibDir: 'C:\llm\rocm-10.0\Lib\site-packages\_rocm_sdk_libraries\bin'
+  devices: { vulkan: Vulkan0, rocm: ROCm1 }
+  llamaSwap:
+    {
+      listen: '0.0.0.0:8181',
+      configPath: 'C:\llm\llama-swap.yaml',
+      logPath: 'C:\llm\logs\llama-swap.log',
+      startPort: 10001,
+      globalTTL: 900,
+    }
+  proxy: { port: 8182 }
+
+models:
+  qwen3.6-35b-a3b:
+    name: Qwen3.6 35B
+    repo: unsloth/Qwen3.6-35B-A3B-MTP-GGUF
+    file: Qwen3.6-35B-A3B-UD-Q4_K_XL.gguf
+    mmproj: mmproj-F16.gguf
+    upstream: Qwen/Qwen3.6-35B-A3B
+    tags: [coding, moe]
+    backend: rocm
+    ctx: 131072
+    nCpuMoe: 20
+    kvCache: q8_0
+
+  qwen3.6-35b-a3b-heretic:
+    name: Qwen3.6 35B Heretic
+    repo: llmfan46/Qwen3.6-35B-A3B-uncensored-heretic-Native-MTP-Preserved-GGUF
+    file: Qwen3.6-35B-A3B-uncensored-heretic-Native-MTP-Preserved-Q4_K_M.gguf
+    mmproj: Qwen3.6-35B-A3B-uncensored-heretic-Native-MTP-Preserved-mmproj-BF16.gguf
+    upstream: Qwen/Qwen3.6-35B-A3B
+    tags: [abliterated, moe]
+    backend: rocm
+    ctx: 131072
+    nCpuMoe: 20
+    kvCache: q8_0
+
+  tiel-coder-q4:
+    name: Tiel-Coder 35B
+    repo: peculiar-ragdoll/Tiel-Coder-35B-A3B-GGUF-MTP
+    file: Tiel-Coder-35B-A3B-MTP-UD-Q4_K_XL.gguf
+    mmproj: mmproj-BF16.gguf
+    upstream: ornith-ai/Ornith-1.5-35B-A3B
+    tags: [coding, moe]
+    backend: rocm
+    ctx: 131072
+    nCpuMoe: 24
+    kvCache: q8_0
+
+  cyber-tiel-coder-q4:
+    name: Cyber-Tiel-Coder 35B
+    repo: peculiar-ragdoll/Cyber-Tiel-Coder-35B-A3B-GGUF-MTP
+    file: Cyber-Tiel-Coder-35B-A3B-MTP-UD-Q4_K_XL.gguf
+    mmproj: mmproj-BF16.gguf
+    upstream: huihui-ai/Huihui-Ornith-1.5-35B-A3B-abliterated
+    tags: [abliterated, moe]
+    backend: rocm
+    ctx: 131072
+    nCpuMoe: 24
+    kvCache: q8_0
+
+  orion-26b-a4b:
+    name: Orion 26B
+    repo: bartowski/TheDrummer_Orion-26B-A4B-v1.1-GGUF
+    file: TheDrummer_Orion-26B-A4B-v1.1-Q4_K_M.gguf
+    mmproj: mmproj-TheDrummer_Orion-26B-A4B-v1.1-f16.gguf
+    tags: [moe]
+    backend: rocm
+    ctx: 131072
+    nCpuMoe: 16
+    kvCache: q8_0
+
+  meromero-26b-a4b:
+    name: MeroMero 26B
+    repo: zerofata/G4-MeroMero-26B-A4B-gguf
+    file: G4-MeroMero-26B-A4B-Q4_K_M.gguf
+    tags: [moe]
+    backend: rocm
+    ctx: 131072
+    nCpuMoe: 12
+    kvCache: q8_0
+
+  occamy-1.0:
+    name: Occamy 35B
+    repo: Accio-Lab/occamy-1.0-GGUF
+    file: occamy-1.0-Q4_K_M.gguf
+    mmproj: mmproj-occamy-1.0-F16.gguf
+    upstream: Qwen/Qwen3.6-35B-A3B
+    tags: [coding, moe]
+    backend: rocm
+    ctx: 131072
+    nCpuMoe: 24
+    kvCache: q8_0
+
+  gemma4-26b-a4b-uncensored:
+    name: Gemma 4 26B HauhauCS
+    repo: HauhauCS/Gemma4-26B-A4B-QAT-Uncensored-HauhauCS-Balanced-MTP
+    file: Gemma4-26B-A4B-QAT-Uncensored-HauhauCS-Balanced-Q4_K_M.gguf
+    mmproj: mmproj-Gemma4-26B-A4B-QAT-Uncensored-HauhauCS-Balanced-BF16.gguf
+    tags: [abliterated, moe]
+    backend: rocm
+    ctx: 131072
+    nCpuMoe: 16
+    kvCache: q8_0
+
+  meromero-26b-a4b-heretic:
+    name: MeroMero 26B Heretic
+    repo: llmfan46/G4-MeroMero-26B-A4B-it-uncensored-heretic-GGUF
+    file: G4-MeroMero-26B-A4B-it-uncensored-heretic-Q4_K_M.gguf
+    mmproj: G4-MeroMero-26B-A4B-it-uncensored-heretic-mmproj-BF16.gguf
+    tags: [abliterated, moe]
+    backend: rocm
+    ctx: 131072
+    nCpuMoe: 16
+    kvCache: q8_0

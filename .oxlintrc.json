@@ -1,0 +1,29 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "extends": ["./node_modules/@zgeoff/oxlint-config/oxlintrc.json"],
+  "env": {
+    "node": true,
+    "es2024": true
+  },
+  "rules": {
+    "typescript/no-require-imports": "error"
+  },
+  "overrides": [
+    {
+      // Bun's synchronous spawn can lose a child's exit and spin its caller forever
+      // (oven-sh/bun#34069); an async spawn keeps the caller's event loop alive. The rule covers
+      // src/ only.
+      "files": ["src/**"],
+      "rules": {
+        "no-restricted-properties": [
+          "error",
+          {
+            "object": "Bun",
+            "property": "spawnSync",
+            "message": "Use an async spawn: Bun.spawnSync can lose a child's exit and hang (oven-sh/bun#34069)."
+          }
+        ]
+      }
+    }
+  ]
+}

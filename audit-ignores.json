@@ -1,0 +1,7 @@
+{
+  "GHSA-g3hv-75wg-m249": {
+    "package": "minimatch",
+    "reason": "The fix is minimatch 11.0.1, but @eslint/config-array (through eslint, a peer of @stylistic/eslint-plugin under @zgeoff/oxlint-config) accepts only ^10.",
+    "expires": "2026-11-30"
+  }
+}

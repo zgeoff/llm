@@ -1,0 +1,5 @@
+turn 1:
+{"stop_reason":"tool_use","blocks":[{"type":"thinking","name":null,"input":null},{"type":"tool_use","name":"write_file","input":{"path":"notes/hello.txt","content":"hello"}}]}
+turn 2:
+{"stop_reason":"end_turn","blocks":[{"type":"thinking","text":null},{"type":"text","text":"I have written the text \"hello\" to `notes/hello.txt`. It is done."}]}
+PASS

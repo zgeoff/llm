@@ -1,0 +1,8 @@
+.worktrees/
+node_modules/
+tmp
+coverage
+.env
+.env.*
+!.env.example
+results.sarif

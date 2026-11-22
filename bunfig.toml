@@ -1,0 +1,26 @@
+[install]
+# pnpm-style symlinked node_modules, so no phantom dependencies
+linker = "isolated"
+
+# bun add saves exact versions, no ^/~ ranges
+exact = true
+
+# supply-chain guard: only install versions published at least 7 days ago
+minimumReleaseAge = 604800
+
+# first-party packages skip the gate, because Renovate bumps them as soon as they publish
+minimumReleaseAgeExcludes = [
+  "@zgeoff/bun-test-extended",
+  "@zgeoff/chex",
+  "@zgeoff/commitlint-config",
+  "@zgeoff/diet",
+  "@zgeoff/format-codemod",
+  "@zgeoff/oxlint-config",
+  "@zgeoff/std",
+  "@zgeoff/testing",
+  "@zgeoff/tsconfig",
+]
+
+[test]
+# register jest-extended matchers, restore changed env vars, and set up the one fetch mock, in every test file
+preload = ["@zgeoff/bun-test-extended", "@zgeoff/testing/preload", "./src/testing/network.ts"]
