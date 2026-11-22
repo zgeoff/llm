@@ -1,8 +1,8 @@
 # Switching models, game mode, timing and autostart
 
 `llm load`, `llm unload` and `llm ttft` talk to llama-swap through its API, so run `llm up` before
-them. `llm compare` reads only the rows in `results/`. `llm game` stops serving and starts it again
-itself, and `llm autostart` registers a Windows Scheduled Task through PowerShell.
+them. `llm compare` reads only the rows in `results/`. `llm game` stops serving itself, and starts
+it again only when it was up. `llm autostart` registers a Windows Scheduled Task through PowerShell.
 `llm <command> --help` lists the flags of each command, and
 [the README](../../README.md#quick-start) covers `llm up` and `llm bench`, whose rows `llm compare`
 also reads.

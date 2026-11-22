@@ -26,9 +26,9 @@ The agent sends its requests to the proxy, so run the proxy and llama-swap befor
 
 ## The agent label
 
-The label is `<name> (<traits>)`, where `name` is the model's `name` in the catalog (the model id
-when it has none). The traits come in this order, joined with `·`, and the parentheses are left out
-when there are none:
+The label is `<model_name> (<traits>)`, where `<model_name>` is the model's `name` in the catalog,
+or the model id when it has none. The traits come in this order, joined with `·`, and the
+parentheses are left out when there are none:
 
 - `effort` when the chat template reads `reasoning_effort`.
 - `vision` when the model has an `mmproj`.
