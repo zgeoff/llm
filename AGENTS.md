@@ -52,8 +52,8 @@ results/        the rows that `llm bench` appends, one file per model and backen
 - `bun run format` fixes formatting.
 - `llm` runs `install`, `pull`, `rm`, `inspect`, `ls`, `disk`, `config`, `up`, `down`, `status`,
   `logs`, `bench`, `proxy`, `profile`, `load`, `unload`, `game`, `ttft`, `compare` and `autostart`.
-  In a test, fake the PowerShell runner and answer HTTP with msw, so no command touches Windows or
-  the network.
+  A command never touches Windows or the network in a test: tests fake the PowerShell runner and
+  answer HTTP with msw.
 - `bun src/cli.ts <command>` runs the CLI from a checkout, and `bun link` installs `llm`.
 
 ## Windows interop
@@ -77,10 +77,10 @@ results/        the rows that `llm bench` appends, one file per model and backen
 - Run a script as administrator through `Start-Process -Verb RunAs`, which shows one UAC prompt, and
   check the result afterwards, because the elevated process cannot pipe output back. Never run one
   without printing what it does first.
-- Add no firewall rule up front: llama-swap listens on `0.0.0.0:8181`, and WSL reaches it at the
-  host IP. When WSL cannot reach llama-swap but Windows reaches it on loopback, `llm up` prints the
-  rule to run. The rule is scoped to the WSL interface alias, never to a subnet, because the WSL NAT
-  subnet can change between WSL starts.
+- A listening Windows process on `0.0.0.0:8181` is reachable from WSL at the host IP with no
+  firewall rule. When WSL cannot reach llama-swap but Windows reaches it on loopback, `llm up`
+  prints the rule to run. The rule is scoped to the WSL interface alias, never to a subnet, because
+  the WSL NAT subnet can change between WSL starts.
 - The llama-swap config sets the ROCm `PATH` as a static value, never `${env.PATH}`.
 - `llm down`, and `llm bench` when llama-swap runs, stop every `llama-server` on the host. Do not
   run them while a manual server runs.
@@ -88,9 +88,9 @@ results/        the rows that `llm bench` appends, one file per model and backen
   llama-swap at the host IP, read again on each request. `install` writes
   `~/.config/systemd/user/llm-proxy.service` and runs `systemctl --user`.
 - `llm profile` edits `~/.config/atc/config.json` after a backup named
-  `config.json.bak-<UTC stamp>-profile-<id>`. It never restarts atc. In a test, point
-  `atcConfigPath` and `homeDir` at a temp folder and fake `runProcess`, so no test reads the real
-  atc config or runs `systemctl`.
+  `config.json.bak-<UTC stamp>-profile-<id>`. It never restarts atc. A test points `atcConfigPath`
+  and `homeDir` at a temp folder and fakes `runProcess`, so no test reads the real atc config or
+  runs `systemctl`.
 - In WSL, `ls` is an alias for `eza --icons` and can hang a non-interactive shell. Use `command ls`.
 
 ## Dependencies
