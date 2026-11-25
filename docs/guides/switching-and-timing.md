@@ -1,7 +1,11 @@
 # Switching models, game mode, timing and autostart
 
-Each command here talks to llama-swap through its API, or to Windows through PowerShell. Run
-`llm up` first, except for `llm game` and `llm autostart`, which start and stop serving themselves.
+`llm load`, `llm unload` and `llm ttft` talk to llama-swap through its API, so run `llm up` before
+them. `llm compare` reads only the rows in `results/`. `llm game on` stops serving, and
+`llm game off` starts it again only when it was up. `llm autostart` registers a Windows Scheduled
+Task through PowerShell. `llm <command> --help` lists the flags of each command, and
+[the README](../../README.md#quick-start) covers `llm up` and `llm bench`, whose rows `llm compare`
+also reads.
 
 ## Load and unload a model
 
@@ -17,7 +21,8 @@ llm unload
 ## Game mode
 
 `llm game on` unloads every model, stops llama-swap and any llama-server, and records whether
-serving was up. `llm game off` starts llama-swap again only if it was:
+serving was up. When the game ends, run `llm game off`, which starts llama-swap again only if
+serving was up:
 
 ```sh
 llm game on
@@ -41,7 +46,8 @@ llm compare
 `llm autostart on` registers the Scheduled Task `llm llama-swap`, which starts llama-swap with the
 generated config at every Windows logon. It prints the task first, then shows one UAC prompt,
 because a logon trigger needs elevation. The task runs as you, without elevation. Declining the
-prompt changes nothing. `off` removes the task, and `status` shows it:
+prompt changes nothing. `llm autostart off` removes the task, after one UAC prompt of its own, and
+`llm autostart status` shows it:
 
 ```sh
 llm autostart on

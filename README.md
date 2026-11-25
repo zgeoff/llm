@@ -65,8 +65,7 @@ llm bench qwen3.6-35b-a3b --depths 0,8192,32768 --reps 3
 
 Switch models, free the GPU for a game, time the first token, compare results and start llama-swap
 at logon: `llm load`, `llm unload`, `llm game on|off`, `llm ttft`, `llm compare` and
-`llm autostart on|off|status`. [The guide](./docs/guides/switching-and-timing.md) walks through
-each.
+`llm autostart on|off|status`. Follow [the guide](./docs/guides/switching-and-timing.md) for each.
 
 Claude Code cannot talk to llama-swap directly, because its system blocks and effort field confuse a
 local model. `llm proxy` is a small server on `127.0.0.1:8182` that drops the identity blocks, maps
@@ -79,15 +78,15 @@ llm proxy install
 ```
 
 Add an atc agent that runs Claude Code against a catalog model through the proxy. It backs up
-`~/.config/atc/config.json` and never restarts atc. [The guide](./docs/guides/atc-agents.md) covers
+`~/.config/atc/config.json` and never restarts atc. See [the guide](./docs/guides/atc-agents.md) for
 the agent label and the flags:
 
 ```sh
 llm profile qwen3.6-35b-a3b-heretic --name local-heretic
 ```
 
-[`models.yaml`](./models.yaml) holds the machine paths, the backend of each model (Vulkan or ROCm),
-and every model's repo, file, context size and launch options.
+Edit [`models.yaml`](./models.yaml) to change the machine paths, the backend of each model (Vulkan
+or ROCm), and every model's repo, file, context size and launch options.
 
 ## Layout
 
@@ -96,5 +95,5 @@ and every model's repo, file, context size and launch options.
 - `results/` holds the rows that `llm bench` appends, one file per model and backend.
 - `research/` holds the research reports behind the model choices.
 
-`llm --help` lists the commands, [`docs/`](./docs/README.md) holds the guides, and `AGENTS.md` holds
-the rules for working in the repo.
+Run `llm --help` to list the commands. Read [`docs/`](./docs/README.md) for the guides and
+`AGENTS.md` for the rules for working in the repo.
